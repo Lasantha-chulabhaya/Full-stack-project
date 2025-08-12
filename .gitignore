@@ -1,0 +1,19 @@
+# Java / Spring Boot
+target/
+*.jar
+*.war
+*.class
+
+# Node / React
+node_modules/
+build/
+dist/
+
+# IDE / System files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

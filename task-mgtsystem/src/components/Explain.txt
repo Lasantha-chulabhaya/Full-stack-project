@@ -1,0 +1,7 @@
+ const [loading, setLoading] = useState(false); 
+
+useState is used to manage local state (loading in this case).
+loading → the current state.
+setLoading → function to update that state.
+Role: Tracks if the registration is in progress.
+Importance: Used to disable the Register button and show a loading spinner for good UX.
