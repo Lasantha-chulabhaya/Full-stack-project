@@ -6,7 +6,7 @@ import styled from '@emotion/styled';
 import { taskAPI, userAPI } from '../services/apiService';
 import { jwtDecode } from 'jwt-decode';
 import moment from 'moment';
-import ChangePasswordModal from './ChangePasswordModal';
+import ChangePasswordModal from './changePasswordModal';
 import TaskFilter from './TaskFilter';
 
 const { Title, Text } = Typography;
