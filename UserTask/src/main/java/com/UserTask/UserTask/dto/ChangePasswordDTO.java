@@ -1,12 +1,12 @@
 package com.UserTask.UserTask.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
+//import lombok.AllArgsConstructor;
+//import lombok.Data;
+//import lombok.NoArgsConstructor;
+//
+//@AllArgsConstructor
+//@NoArgsConstructor
+//@Data
 public class ChangePasswordDTO {
 
     private String oldPassword;
@@ -26,5 +26,13 @@ public class ChangePasswordDTO {
 
     public void setNewPassword(String newPassword) {
         this.newPassword = newPassword;
+    }
+
+    public ChangePasswordDTO(String oldPassword, String newPassword) {
+        this.oldPassword = oldPassword;
+        this.newPassword = newPassword;
+    }
+
+    public ChangePasswordDTO() {
     }
 }

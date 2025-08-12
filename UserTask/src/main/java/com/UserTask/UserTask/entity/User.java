@@ -1,7 +1,5 @@
 package com.UserTask.UserTask.entity;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
 import net.bytebuddy.implementation.bind.annotation.AllArguments;
 
 import javax.persistence.*;
