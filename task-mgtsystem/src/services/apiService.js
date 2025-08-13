@@ -1,8 +1,8 @@
 // src/services/apiService.js
 import axios from 'axios';
 
-// Base URL for your Spring Boot backend
-const BASE_URL = 'http://3.111.29.34:8082/api/v1';
+// FIXED: Changed port from 8082 to 8080 to match Spring Boot config
+const BASE_URL = 'http://3.111.29.34:8080/api/v1';
 
 // Create axios instance with base configuration
 const apiService = axios.create({
@@ -10,6 +10,7 @@ const apiService = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
+  timeout: 10000, // Add timeout for better error handling
 });
 
 // Request interceptor to add JWT token to requests
@@ -19,9 +20,11 @@ apiService.interceptors.request.use(
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+    console.log('Making request to:', config.url); // Debug logging
     return config;
   },
   (error) => {
+    console.error('Request error:', error);
     return Promise.reject(error);
   }
 );
@@ -29,14 +32,25 @@ apiService.interceptors.request.use(
 // Response interceptor to handle common errors
 apiService.interceptors.response.use(
   (response) => {
+    console.log('Response received:', response.status); // Debug logging
     return response;
   },
   (error) => {
+    console.error('Response error:', error); // Debug logging
+    
     if (error.response?.status === 401) {
       // Handle unauthorized access
       localStorage.removeItem('jwtToken');
       window.location.href = '/login';
-    }                                       //Automatic logout on token expiration
+    }
+    
+    // Handle network errors
+    if (error.code === 'ECONNABORTED') {
+      console.error('Request timeout');
+    } else if (error.message === 'Network Error') {
+      console.error('Network error - check CORS and backend availability');
+    }
+    
     return Promise.reject(error);
   }
 );
